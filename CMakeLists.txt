@@ -22,7 +22,7 @@ IF(ANDROID)
 		./lua-cjson.git/dtoa.c
 		)
 
-	ADD_LIBRARY(slua SHARED ${LUA_SRC_LIST} ${LUASOCKET_SRC_LIST} ${LUACJSON_SRC_LIST})
+	ADD_LIBRARY(slua SHARED ${LUA_SRC_LIST} ${LUASOCKET_SRC_LIST} ${LUACJSON_SRC_LIST} ./luaxml.git/LuaXML_lib.c )
 	#TARGET_LINK_LIBRARIES(slua m)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D \"log2(x)=(log(x)/1.4426950408889634)\" -D \"lua_getlocaledecpoint()=(\'.\')\" ")
 	
@@ -43,10 +43,10 @@ ELSEIF(WIN32) #
 		./lua-cjson.git/dtoa.c
 		)
 
-	ADD_LIBRARY(slua SHARED ${LUA_SRC_LIST} ${LUASOCKET_SRC_LIST} ${LUACJSON_SRC_LIST})
+	ADD_LIBRARY(slua SHARED ${LUA_SRC_LIST} ${LUASOCKET_SRC_LIST} ${LUACJSON_SRC_LIST} ./luaxml.git/LuaXML_lib.c )
 	TARGET_LINK_LIBRARIES(slua ws2_32.lib)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLUA_BUILD_AS_DLL -DLUA_LIB")
 
-	ADD_EXECUTABLE(lua ${LUA_SRC_LIST} ./src/lua.c)
-
+	ADD_EXECUTABLE(lua ${LUA_SRC_LIST} ./src/lua.c ${LUASOCKET_SRC_LIST} ${LUACJSON_SRC_LIST} ./luaxml.git/LuaXML_lib.c )
+	TARGET_LINK_LIBRARIES(lua ws2_32.lib)
 ENDIF(ANDROID)
