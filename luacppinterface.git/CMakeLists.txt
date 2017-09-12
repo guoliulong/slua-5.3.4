@@ -1,14 +1,12 @@
 cmake_minimum_required (VERSION 2.6)
 
-project (LuaCppInterface)
+#project (LuaCppInterface)
 
-include_directories("lua/src")
+include_directories("../src")
 
 list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -g -ftest-coverage -fprofile-arcs")
 
-target_link_libraries(LuaCppInterface lua)
-
-add_library(luacppinterface STATIC 
+add_library(LuaCppInterface STATIC 
 	LuaCppInterface/luacoroutine.cpp
 	LuaCppInterface/luareference.cpp
 	LuaCppInterface/luacppinterface.cpp
@@ -17,3 +15,9 @@ add_library(luacppinterface STATIC
 	LuaCppInterface/luaerror.cpp
 	LuaCppInterface/luastringconversion.cpp
 )
+
+target_link_libraries(LuaCppInterface slua)
+
+include_directories("./LuaCppInterface")
+add_executable(LuaInterfaceTest1 tests/luacpp.cpp)
+target_link_libraries(LuaInterfaceTest1 LuaCppInterface slua)

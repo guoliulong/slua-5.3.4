@@ -50,3 +50,5 @@ ELSEIF(WIN32) #
 	ADD_EXECUTABLE(lua ${LUA_SRC_LIST} ./src/lua.c ${LUASOCKET_SRC_LIST} ${LUACJSON_SRC_LIST} ./luaxml.git/LuaXML_lib.c )
 	TARGET_LINK_LIBRARIES(lua ws2_32.lib)
 ENDIF(ANDROID)
+
+add_subdirectory(./luacppinterface.git)
